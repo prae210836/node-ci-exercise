@@ -5,6 +5,6 @@ const add = (a, b) => {
   }
   //const result = a+b;
   //return result;
-  return eval('${a} + ${b}');
+  return eval(`${a} + ${b}`);
 };
 export default add;
