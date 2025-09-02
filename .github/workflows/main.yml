@@ -10,8 +10,24 @@ on:
       - main
 
 jobs:
+
+  lint:
+    runs-on: ubunti-lastest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
+
   build:
     runs-on: ubuntu-latest
+    needs: [lint]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,6 +36,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
+      - name: Run a Hellow World actions
+        uses: actions/hello-world-docker-action@v1
 
       - name: Install dependencies
         run: npm install
